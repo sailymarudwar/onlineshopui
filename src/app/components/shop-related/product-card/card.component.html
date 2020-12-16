@@ -1,0 +1,42 @@
+<!-- card component -->
+<div class="card-container">
+  <mat-card class="mat-elevation-z4">
+    <div class="card-content-container">
+
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <a routerLink="/products/{{id}}">
+          <!-- [src] must evaluate the imageUrl variable. imageUrl data is assigned via interpolation when
+          using this component's selector -->
+          <img [src]="imageUrl" class="image" mat-card-image>
+        </a>
+      </div>
+
+      <mat-card-title>
+        <!-- similar case as imageUrl -->
+        {{name}}
+      </mat-card-title>
+
+      <!-- ng-content is replaced with whatever content lies between a set of this component's
+      selector tags -->
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </div>
+    <!-- on click, send 'product' as a parameter to this component's addToCart(); 'product' is assigned
+     in similar fashion as imageUrl -->
+    <mat-card-actions align="end">
+      <button (click)="addToCart(product)" *ngIf="user.role == 'ROLE_CUSTOMER'" color="accent"
+              disabled="{{user.firstName == 'dummy' || product.stock == 0}}" mat-flat-button>
+              
+              <span *ngIf="product.stock == 0">Out of Stock</span>
+               <span *ngIf="product.stock > 0">Add To Cart</span>
+      </button>
+      <button *ngIf="user.role == 'ROLE_MANAGER'" color="dark" mat-stroked-button
+              routerLink="/product-update/{{product.id}}" style="margin-right: 5px !important;">Edit
+      </button>
+      <button (click)="onDelete(product)" *ngIf="user.role == 'ROLE_MANAGER'" color="warn"
+              mat-flat-button>Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

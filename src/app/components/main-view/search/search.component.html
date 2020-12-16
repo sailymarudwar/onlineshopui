@@ -1,0 +1,10 @@
+<!-- search component -->
+<mat-form-field floatLabel="never" [style.width.px]=327 [style.fontSize.px]=17>
+
+  <mat-label>Search</mat-label>
+
+  <!-- the #input variable holds the data that is obtained from the input tag; on the event 'keyup', the data from
+  #input is sent to this component's search() -->
+  <input #input (keyup)="search(input.value)" matInput placeholder="E.g. Sports" type="Search">
+
+</mat-form-field>

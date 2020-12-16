@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<mat-toolbar>
+	<div fxLayout="row">
+		<img md-card-image src="" fxFlex="25">
+		<span fxFlex="10"></span>
+		<md-card-content fxFlex="65">
+
+			<span>{{pageTitle}}</span>
+
+		</md-card-content>
+	</div>
+</mat-toolbar>
+
+<md-card>
+
+	<div fxLayout="row">
+		<img md-card-image src="" fxFlex="20">
+		<span fxFlex="10"></span>
+		<md-card-content fxFlex="30">			 		
+			<form #productform="ngForm" (ngSubmit)="onSubmit(productform)" >
+				<div class="form-group">
+				<span style="color:red" *ngFor="let err of errors">{{err}}<br/></span>
+					<label>Product Name</label>
+					<span
+						[ngClass]="{'invalidLabel': (productAlreadyExists || (name.invalid && (name.dirty || name.touched))) }">
+						<span style="color:red" *ngIf="productAlreadyExists">(Product already exists, please
+							enter a new Product Name)</span>
+						<span style="color:red"
+							*ngIf="!productAlreadyExists && (name.invalid && name.errors.required) && (name.dirty || name.touched)">(Product Name
+							Cannot be blank)</span>
+						<span style="color:red"
+							*ngIf="name.errors?.pattern">(Invalid Product Name)</span>
+						<span style="color:red"
+							*ngIf="!productAlreadyExists && (name.invalid && !name.errors.required && name.errors.notint) && (name.dirty || name.touched)">({{name.errors.notintmess}})</span>
+					</span>
+					<input type="text" required  
+						[ngClass]="{'invalidTB': (productAlreadyExists || (name.invalid && (name.dirty || name.touched))) }"
+						class="form-control" id="name" [(ngModel)]="product.name" name="name" #name="ngModel">
+					<p>
+					</p>
+				</div>				
+				<div class="form-group">
+					<label> Category Type</label>
+					<span [ngClass]="{'invalidLabel': (categoryType.invalid && (categoryType.touched || categoryType.dirty)) }"
+						*ngIf="categoryType.invalid && (categoryType.touched || categoryType.dirty)">(Category Type cannot be
+						blank)</span>
+					<select required #categoryType="ngModel" [(ngModel)]="product.categoryType" name="categoryType" class="form-control">
+						<option *ngFor="let cat of categories" value="{{cat.categoryType}}">
+							{{cat.name}}
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label> Product Price</label>
+					<span [ngClass]="{'invalidLabel': (price.invalid && (price.touched || price.dirty)) }"
+						*ngIf="price.invalid && (price.touched || price.dirty)">(Product Price cannot be blank)</span>
+					<input [ngClass]="{'invalidTB': (price.invalid && (price.touched || price.dirty))}" min="0" required
+						type="number" class="form-control" id="price" [(ngModel)]="product.price" name="price" #price="ngModel">
+				</div>
+				<div class="form-group">
+					<label> Product Stock</label>
+					<span [ngClass]="{'invalidLabel': (stock.invalid && (stock.touched || stock.dirty)) }"
+						*ngIf="stock.invalid && (stock.touched || stock.dirty)">(Product Stock cannot be blank)</span>
+					<input [ngClass]="{'invalidTB': (stock.invalid && (stock.touched || stock.dirty))}" min="0" required
+						type="number" class="form-control" id="stock" [(ngModel)]="product.stock" name="stock" #stock="ngModel">
+				</div>
+				<div class="form-group">
+					<label> Product Description</label>
+					<span [ngClass]="{'invalidLabel': (description.invalid && (description.touched || description.dirty)) }"
+						*ngIf="description.invalid && (description.touched || description.dirty)">(Product Description cannot be
+						blank)</span>
+						
+					<textarea maxlength="3000" [ngClass]="{'invalidTB': (description.invalid && (description.touched || description.dirty))}"
+						required class="form-control" id="description" [(ngModel)]="product.description" name="description"
+						#description="ngModel"></textarea>
+				</div>
+				<div class="form-group">
+					<label> Product Image</label>
+					<span [ngClass]="{'invalidLabel': (imageUrl.invalid && (imageUrl.touched || imageUrl.dirty)) }"
+						*ngIf="imageUrl.invalid && (imageUrl.touched || imageUrl.dirty)">(Product Image cannot be
+						blank)</span>
+					<input maxlength="200" [ngClass]="{'invalidTB': (imageUrl.invalid && (imageUrl.touched || imageUrl.dirty))}"
+						required type="text" class="form-control" id="imageUrl" [(ngModel)]="product.imageUrl" name="imageUrl"
+						#imageUrl="ngModel">
+				</div>
+
+
+				<!-- <div class="form-group">
+					<label> SID</label>
+					<select [(ngModel)]="product.sid" name="sid" class="form-control">
+						<option *ngFor="let c of supervisors" [ngValue]="c.sid">{{c.sid}}({{c.name}})</option>
+					</select>
+				</div>
+				 -->
+				<button class="btn btn-success" id="productSubmitButton" [disabled]="!productform.form.valid" type="submit">Submit</button> |
+				<button class="btn btn-primary" type="reset">Start over?</button>
+
+			</form>
+		</md-card-content>
+		<img md-card-image src="" fxFlex="30">
+
+	</div>
+</md-card>

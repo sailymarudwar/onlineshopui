@@ -1,0 +1,32 @@
+<button *ngIf="!isLoggedIn; else signedIn" [matMenuTriggerFor]="userMenu" mat-icon-button>
+  <mat-icon>person</mat-icon>
+</button>
+
+<ng-template #signedIn>
+  <button [matMenuTriggerFor]="accountMenu" mat-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</ng-template>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-menu-item routerLink="/user-profile">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+
+  <button (click)="logoutUser()" mat-menu-item routerLink="/login">
+    <mat-icon>vpn_key</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item routerLink="/login">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+  <button mat-menu-item routerLink="/signup">
+    <mat-icon>portrait</mat-icon>
+    <span>Sign up</span>
+  </button>
+</mat-menu>

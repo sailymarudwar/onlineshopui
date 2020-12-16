@@ -1,0 +1,17 @@
+<!-- card-status component -->
+
+<!-- is the cart empty? -->
+<div *ngIf="quantity > 0; else emptyCart">
+  <!-- no, it's not; display the shopping cart icon with a badge noting the total quantity -->
+  <button mat-button>
+    <mat-icon id="cartCount" [matBadge]="quantity" matBadgeColor="accent" matBadgeSize="small">shopping_cart
+    </mat-icon>
+  </button>
+</div>
+
+<ng-template #emptyCart>
+  <!-- yes, the cart is empty; display an empty shopping cart icon -->
+  <button mat-button>
+    <mat-icon id="cartCount" [matBadge]="quantity" matBadgeColor="accent" matBadgeSize="small">shopping_cart</mat-icon>
+  </button>
+</ng-template>

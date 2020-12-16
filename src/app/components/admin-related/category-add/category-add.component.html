@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<mat-toolbar>
+	<div fxLayout="row">
+		<img md-card-image src="" fxFlex="25">
+		<span fxFlex="10"></span>
+		<md-card-content fxFlex="65">
+			<span>{{pageTitle}}</span>
+		</md-card-content>
+	</div>
+</mat-toolbar>
+
+<md-card>
+
+	<div fxLayout="row">
+		<img md-card-image src="" fxFlex="20">
+		<span fxFlex="10"></span>
+		<md-card-content fxFlex="30">
+			<form #categoryform="ngForm" (ngSubmit)="onSubmit(categoryform)">
+				<div class="form-group">
+					<span style="color:red" *ngFor="let err of errors">{{err}}<br /></span>
+					<label>Category Name</label>
+					<span
+						[ngClass]="{'invalidLabel': (categoryAlreadyExists || (name.invalid && (name.dirty || name.touched))) }">
+						<span style="color:red" *ngIf="categoryAlreadyExists">(Category already exists, please
+							enter a new Category Name)</span>
+						<span style="color:red"
+							*ngIf="!categoryAlreadyExists && (name.invalid && name.errors.required) && (name.dirty || name.touched)">(Category
+							Name Cannot be blank)</span>
+						<span style="color:red" *ngIf="name.errors?.pattern">(Invalid Category Name)</span>
+						<span style="color:red"
+							*ngIf="!categoryAlreadyExists && (name.invalid && !name.errors.required && name.errors.notint) && (name.dirty || name.touched)">({{name.errors.notintmess}})</span>
+					</span>
+					<input type="text" required
+						[ngClass]="{'invalidTB': (categoryAlreadyExists || (name.invalid && (name.dirty || name.touched))) }"
+						class="form-control" id="name" [(ngModel)]="category.name" name="name" #name="ngModel">
+					<p>
+					</p>
+				</div>
+				<div class="form-group">
+					<label> Category Type{{pageTitle =='Category Add'?"(Auto Generated)":""}}</label>
+					<span
+						[ngClass]="{'invalidLabel': (categoryType.invalid && (categoryType.touched || categoryType.dirty)) }"
+						*ngIf="categoryType.invalid && (categoryType.touched || categoryType.dirty)">(Category Type
+						cannot be blank)</span>
+					<input
+						[ngClass]="{'invalidTB': (categoryType.invalid && (categoryType.touched || categoryType.dirty))}"
+						min="0" required type="number" class="form-control" id="categoryType"
+						[(ngModel)]="category.categoryType" disabled name="categoryType" #categoryType="ngModel">
+				</div>				
+				<button class="btn btn-success" id="categorySubmitButton" [disabled]="!categoryform.form.valid"
+					type="submit">Submit</button> |
+				<button class="btn btn-primary" type="reset">Start over?</button>
+
+			</form>
+		</md-card-content>
+		<img md-card-image src="" fxFlex="30">
+
+	</div>
+</md-card>

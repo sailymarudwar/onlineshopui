@@ -1,0 +1,15 @@
+<!-- product-list component -->
+<div class="container" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px grid">
+  <!-- the flex layout properties above and below this comment make the Card Component cards
+  produced with the ngFor loop responsive, based on the screen size. -->
+  <div *ngFor="let tempProduct of products" fxFlex="25%" fxFlex.sm="33%" fxFlex.xs="100%">
+
+    <!-- the following properties for 'app-card' (the Card Component) are passed to the variables
+    in the Card Component (annotated with @Input) through interpolation -->
+    <app-card [product]="tempProduct" id="{{tempProduct.id}}" imageUrl="{{tempProduct.imageUrl}}"
+              name="{{tempProduct.name}}">
+      {{tempProduct.price | currency: 'USD'}}
+    </app-card>
+
+  </div>
+</div>

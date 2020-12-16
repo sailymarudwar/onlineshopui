@@ -1,0 +1,41 @@
+.md-dialog-container {
+      background-color: #000;
+      width: 250px;
+      height: 250px
+}
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+interface Country {
+  name: string;
+  alpha2Code: string;
+  alpha3Code: string;
+  numericCode: string;
+}
+
+.mat-header-row{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+}
+.table-container {
+  max-height: calc(100vh - 155px);
+  overflow: auto;
+}
+
+a:hover {
+ cursor:pointer !important;
+}
+button:hover {
+   cursor:pointer !important;
+}

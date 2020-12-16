@@ -1,0 +1,8 @@
+<!-- category-menu component -->
+<div mat-subheader>Categories</div>
+<mat-selection-list #selectedCat (selectionChange)="onChange($event, selectedCat.selectedOptions.selected)"
+                    [multiple]="false">
+  <mat-list-option *ngFor="let category of categories" [value]="category.categoryType">
+    {{category.name}}
+  </mat-list-option>
+</mat-selection-list>

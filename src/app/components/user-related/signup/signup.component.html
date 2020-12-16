@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="header-container">
+  <h1>Sign up</h1>
+</div>
+
+<md-card>
+
+	<div fxLayout="row">
+		<img md-card-image src="" fxFlex="20">
+		<span fxFlex="10"></span>
+		<md-card-content fxFlex="30">
+			<form #registrationform="ngForm" (ngSubmit)="onSubmit(registrationform)">
+				<div class="form-group">
+					<span style="color:red" *ngFor="let err of errors">{{err}}<br /></span>
+					<label>Email</label>
+					<span
+						[ngClass]="{'invalidLabel': (emailAlreadyExists || (email.invalid && (email.dirty || email.touched))) }">
+						<span style="color:red" *ngIf="emailAlreadyExists">(Email already exists, please
+							enter a new Email)</span>
+						<span style="color:red"
+							*ngIf="!emailAlreadyExists && (email.invalid && email.errors.required) && (email.dirty || email.touched)">(Email
+							Cannot be blank)</span>
+						<span style="color:red" *ngIf="email.errors?.pattern">(Invalid Email)</span>
+						<span style="color:red"
+							*ngIf="!emailAlreadyExists && (email.invalid && !email.errors.required && email.errors.notint) && (email.dirty || email.touched)">({{email.errors.notintmess}})</span>
+					</span>
+					<input type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+						[ngClass]="{'invalidTB': (emailAlreadyExists || (email.invalid && (email.dirty || email.touched))) }"
+						class="form-control" id="email" [(ngModel)]="user.email" name="email" #email="ngModel">
+					<p>
+					</p>
+				</div>
+				<div class="form-group">
+					<label>First Name</label>
+					<span [ngClass]="{'invalidLabel': (firstName.invalid && (firstName.touched || firstName.dirty)) }"
+						*ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">(First Name cannot be
+						blank)</span>
+					<input maxlength="30"
+						[ngClass]="{'invalidTB': (firstName.invalid && (firstName.touched || firstName.dirty))}"
+						required type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName"
+						name="firstName" #firstName="ngModel">
+				</div>
+				<div class="form-group">
+					<label>Last Name</label>
+					<span [ngClass]="{'invalidLabel': (lastName.invalid && (lastName.touched || lastName.dirty)) }"
+						*ngIf="lastName.invalid && (lastName.touched || lastName.dirty)">(Last lastName cannot be
+						blank)</span>
+					<input maxlength="30"
+						[ngClass]="{'invalidTB': (lastName.invalid && (lastName.touched || lastName.dirty))}" required
+						type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName"
+						#lastName="ngModel">
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<span [ngClass]="{'invalidLabel': (password.invalid && (password.touched || password.dirty)) }"
+						*ngIf="password.invalid && (password.touched || password.dirty)">(Password cannot be
+						blank)</span>
+					<input maxlength="30"
+						[ngClass]="{'invalidTB': (password.invalid && (password.touched || password.dirty))}" required
+						type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password"
+						#password="ngModel">
+				</div>
+
+				<div class="form-group">
+					<label>Adress1</label>
+					<span [ngClass]="{'invalidLabel': (address1.invalid && (address1.touched || address1.dirty)) }"
+						*ngIf="address1.invalid && (address1.touched || address1.dirty)">(Adress1 cannot be
+						blank)</span>
+					<input required
+						[ngClass]="{'invalidTB': (address1.invalid && (address1.touched || address1.dirty))}"
+						type="text" min="0" class="form-control" id="address1" [(ngModel)]="user.address1"
+						name="address1" #address1="ngModel">
+				</div>
+
+				<div class="form-group">
+					<label>Adress2</label>
+					<span [ngClass]="{'invalidLabel': (address2.invalid && (address2.touched || address2.dirty)) }"
+						*ngIf="address2.invalid && (address2.touched || address2.dirty)">(Adress2 cannot be
+						blank)</span>
+					<input required
+						[ngClass]="{'invalidTB': (address2.invalid && (address2.touched || address2.dirty))}"
+						type="text" min="0" class="form-control" id="address2" [(ngModel)]="user.address2"
+						name="address2" #address2="ngModel">
+				</div>
+
+				<div class="form-group">
+					<label> City</label>
+					<span [ngClass]="{'invalidLabel': (city.invalid && (city.touched || city.dirty)) }"
+						*ngIf="city.invalid && (city.touched || city.dirty)">(City cannot be
+						blank)</span>
+					<input maxlength="30" [ngClass]="{'invalidTB': (city.invalid && (city.touched || city.dirty))}"
+						required type="text" class="form-control" id="city" [(ngModel)]="user.city" name="city"
+						#city="ngModel">
+				</div>
+
+				<div class="form-group">
+					<label> State</label>
+					<span [ngClass]="{'invalidLabel': (state.invalid && (state.touched || state.dirty)) }"
+						*ngIf="state.invalid && (state.touched || state.dirty)">(State cannot be
+						blank)</span>
+					<select required #state="ngModel" [(ngModel)]="user.state" name="state" class="form-control">
+						<option value="IL">IL</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label> Zip</label>
+					<span [ngClass]="{'invalidLabel': (zip.invalid && (zip.touched || zip.dirty)) }"
+						*ngIf="zip.invalid && (zip.touched || zip.dirty)">(Zip cannot be blank)</span>
+					<input [ngClass]="{'invalidTB': (zip.invalid && (zip.touched || zip.dirty))}" min="0" required
+						type="number" class="form-control" id="zip" [(ngModel)]="user.zip" name="zip" #zip="ngModel">
+				</div>
+
+
+				<div class="form-group">
+					<label> Country</label>
+					<span [ngClass]="{'invalidLabel': (country.invalid && (country.touched || country.dirty)) }"
+						*ngIf="country.invalid && (country.touched || country.dirty)">(Country cannot be
+						blank)</span>
+					<select required #country="ngModel" [(ngModel)]="user.country" name="country" class="form-control">
+						<option value="USA">USA</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label> Phone</label>
+					<span [ngClass]="{'invalidLabel': (phone.invalid && (phone.touched || phone.dirty)) }"
+						*ngIf="phone.invalid && (phone.touched || phone.dirty)">(Phone cannot be blank)</span>
+					<input [ngClass]="{'invalidTB': (phone.invalid && (phone.touched || phone.dirty))}" min="0" required
+						type="number" class="form-control" id="phone" [(ngModel)]="user.phone" name="phone"
+						#phone="ngModel">
+				</div>
+
+				<button id="signupbutton" class="btn btn-success" [disabled]="registrationform.form.invalid" type="submit">
+							<mat-button-toggle value="bold">Submit</mat-button-toggle>
+				</button>
+				|
+				<button class="btn btn-primary" type="reset">Start over?</button>
+
+			</form>
+		</md-card-content>
+		<img md-card-image src="" fxFlex="30">
+
+	</div>
+</md-card>

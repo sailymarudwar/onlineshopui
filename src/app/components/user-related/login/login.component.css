@@ -1,0 +1,23 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.form-container{
+  padding: 20px;
+}
+
+.mat-card{
+  height: 250px;
+}
+
+.mat-form-field{
+  padding: 9px;
+  width: 249px !important;
+}
+
+button {
+  position: absolute;
+  right: 200px;
+}

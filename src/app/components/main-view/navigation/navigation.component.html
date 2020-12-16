@@ -1,0 +1,73 @@
+<!-- navigation component -->
+<mat-drawer-container class="container" hasBackdrop="false">
+
+  <!-- the side panel container -->
+  <mat-drawer #drawer class="drawer" mode="side">
+    <!-- if a user is logged in, then display their name. Else, display 'Guest' -->
+    <div *ngIf="isLoggedIn; else guestGreeting" class="user-greeting">
+      <h1>Hello, {{activeUser.firstName}} </h1>
+    </div>
+
+    <ng-template #guestGreeting>
+      <div class="user-greeting">
+        <h1>Hello, Guest</h1>
+      </div>
+    </ng-template>
+
+    <mat-divider *ngIf="activeUser.role == 'ROLE_MANAGER'"></mat-divider>
+
+    <!-- this component selector is used to display the admin tools -->
+    <app-admin-menu *ngIf="activeUser.role == 'ROLE_MANAGER'" class="admin-menu"></app-admin-menu>
+
+    <mat-divider *ngIf="activeUser.role == 'ROLE_MANAGER'"></mat-divider>
+
+    <div *ngIf="activeUser.role == 'ROLE_MANAGER' || activeUser.role == 'ROLE_CUSTOMER'" class="orders-container">
+      <div mat-subheader>Your Account</div>
+      <mat-nav-list>
+        <mat-list-item routerLink="/orders" routerLinkActive="active">Orders</mat-list-item>
+      </mat-nav-list>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- this component selector is used to display the category menu -->
+    <app-category-menu class="category-menu"></app-category-menu>
+  </mat-drawer>
+
+  <!-- the main part of the page -->
+  <mat-drawer-content>
+    <mat-toolbar class="position-fixed">
+      <mat-toolbar-row>
+
+        <button (click)="drawer.toggle()" mat-button type="button">
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <button (click)="refreshPage()" mat-button type="button">
+          <mat-icon>home</mat-icon>
+        </button>
+
+
+        <app-user-status [isLoggedIn]="isLoggedIn"></app-user-status>
+
+
+        <app-cart-status routerLink="/cart-details"></app-cart-status>
+
+        <!-- this component selector is used to display the status of the cart on the button-->
+
+
+        <!-- this component selector is used to display the search bar -->
+        <app-search></app-search>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <br/><br/><br/><br/>
+
+    <div>
+      <!-- where a routerLink's corresponding component html will display -->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

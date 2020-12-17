@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-front": {
+    "andyui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-front",
+            "outputPath": "dist/andyui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,19 +67,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-front:build",
+            "browserTarget": "andyui:build",
 			"proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-front:build:production"
+              "browserTarget": "andyui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-front:build"
+            "browserTarget": "andyui:build"
           }
         },
         "test": {
@@ -117,18 +117,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-front:serve"
+            "devServerTarget": "andyui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-front:serve:production"
+              "devServerTarget": "andyui:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-front",
+  "defaultProject": "andyui",
   "cli": {
     "analytics": false
   }

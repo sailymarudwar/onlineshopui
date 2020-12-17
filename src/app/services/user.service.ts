@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../model/user';
 import {environment} from "../../environments/environment";
+import {  CookieService } from 'ngx-cookie-service';  
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,8 +17,8 @@ export class UserService {
     public nameTerms = new Subject<string>();
     public name$ = this.nameTerms.asObservable();
 
-    constructor(private http: HttpClient) {
-        const memo = localStorage.getItem('currentUser');
+    constructor(private http: HttpClient,private cookieService:CookieService) {
+        const memo = this.cookieService.get('currentUser');
     }
 
     // TODO: this method will retrieve a user by email from the backend.
@@ -52,8 +54,8 @@ export class UserService {
     logout(): Observable<any> {
 
         // clear local storage
-        localStorage.clear();
-
+        
+        this.cookieService.deleteAll();
         // the modified url for the backend endpoint
         const searchUrl = `${this.apiUrl}/users/user/logout`;
 

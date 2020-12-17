@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../model/user';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-
+import {  CookieService } from 'ngx-cookie-service';  
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   errors: string[];
   hide: boolean = true;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private userService: UserService, private router: Router) {
+  constructor(@Inject(DOCUMENT) private document: Document, private userService: UserService, private router: Router,private cookieService:CookieService) {
      this.errors = [];
   }
 
@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit {
       data => {
 
         this.user = data;
+        this.cookieService.set('loggedIn', 'true');
+        this.cookieService.set('email', this.user.email);
+        this.cookieService.set('role', this.user.role);
 
-        localStorage.setItem('loggedIn', 'true');
-        localStorage.setItem('email', this.user.email);
-        localStorage.setItem('role', this.user.role);
 
         console.log(data);
 

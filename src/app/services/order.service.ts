@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Category} from '../model/category';
 import {Observable} from "rxjs";
 import { OrderDetail } from '../model/orderdetail';
+import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   // the backend url for products, hardcoded
-  readonly baseUrl: string = '/api/orders';
+  readonly baseUrl: string = environment.baseUrl+'/api/orders';
   
   constructor(private http: HttpClient) { }
 

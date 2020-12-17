@@ -5,13 +5,14 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../model/product";
 import {HttpHeaders} from '@angular/common/http';
 import {Order} from '../model/order';
+import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
   // the api url for shopping cart
-  readonly baseUrl: string = '/api/shopping-cart';
+  readonly baseUrl: string = environment.baseUrl+'/api/shopping-cart';
 
   constructor(private http: HttpClient) { }
 

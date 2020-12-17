@@ -4,14 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../model/user';
-
-
+import {environment} from "../../environments/environment";
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    apiUrl = "/api"
+    apiUrl = environment.baseUrl+"/api";
 
     public nameTerms = new Subject<string>();
     public name$ = this.nameTerms.asObservable();

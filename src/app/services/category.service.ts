@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Category} from "../model/category";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CategoryService {
 
   // the backend url for products, hardcoded
-  readonly baseUrl: string = '/api/categories';
+  readonly baseUrl: string = environment.baseUrl+'/api/categories';
 
   constructor(private http: HttpClient) {
   }

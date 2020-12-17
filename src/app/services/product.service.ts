@@ -3,15 +3,15 @@ import {Product} from "../model/product";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Category} from '../model/category';
 import {Observable} from "rxjs";
-
+import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-    apiUrl = "/api"
+    apiUrl = environment.baseUrl+"/api"
 
   // the backend url for products, hardcoded
-  readonly baseUrl: string = '/api/products';
+  readonly baseUrl: string = environment.baseUrl+'/api/products';
 
   constructor(private http: HttpClient) {
   }

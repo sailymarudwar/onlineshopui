@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://kaustubhenterprises.herokuapp.com/",
+        "target": "https://kaustubhenterprises.herokuapp.com",
         "secure": false,
         "logLevel": "debug"
     }

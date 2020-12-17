@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve --proxy-config proxy.conf.json",	
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -38,7 +38,7 @@
     "svg-country-flags": "^1.2.9",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2",
-    "typescript": "~4.0.2",
+    "typescript": "~4.0.2"
     "express": "^4.17.1"
   },
   "devDependencies": {
